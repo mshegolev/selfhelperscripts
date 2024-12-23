@@ -3,8 +3,8 @@
 get time now plus workhours
 
 ```bash
-chmod +x /opt/develop/selfhelperscripts/scripts/tnow.sh
-echo "alias tnow='bash /opt/develop/selfhelperscripts/scripts/tnow.sh'" >> ~/.zshrc
+chmod +x /opt/develop/selfhelperscripts/selfhelperscripts/scripts/tnow.sh
+echo "alias tnow='bash /opt/develop/selfhelperscripts/selfhelperscripts/scripts/tnow.sh'" >> ~/.zshrc
 source ~/.zshrc
 
 ```
