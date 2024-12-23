@@ -2,13 +2,14 @@ from setuptools import setup, find_packages
 
 setup(
     name="selfhelperscripts",
-    version="0.1.0",
+    version="0.1.1",
     author="Mikhail Shche",
     description="Get your life well",
     long_description=open("README.md", "r", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/mshegole/selfhelpscripts",
-    packages=find_packages(),
+    package_dir={'': 'selfhelperscripts/src'},
+    packages=find_packages(where='src'),
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.10",
