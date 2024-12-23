@@ -1,11 +1,11 @@
 import os
+from typing import Tuple
 
-from paramiko import SSHClient, SSHConfig, AutoAddPolicy
-
+from paramiko import AutoAddPolicy, SSHClient, SSHConfig
 
 
 class CmdHelper:
-    def __init__(self, host: str = 'selfhosthelper', user: str = '', password: str = ''):
+    def __init__(self, host: str = "selfhosthelper", user: str = "", password: str = ""):
         self.host: str = host
         self.user: str = user
         self.password: str = password
@@ -25,17 +25,17 @@ class CmdHelper:
     def connect(self):
         config = self.default_ssh_conf.lookup(self.host)
 
-        assert config, 'You must set host to your ~/.ssh/config'
+        assert config, "You must set host to your ~/.ssh/config"
 
-        if not self.user and 'user' in config:
-            self.user = config['user']
+        if not self.user and "user" in config:
+            self.user = config["user"]
 
-        if self.host == 'selfhosthelper':
-            self.host = config['hostname']
+        if self.host == "selfhosthelper":
+            self.host = config["hostname"]
 
-        if config and 'identityfile' in config:
+        if config and "identityfile" in config:
             self.client.load_system_host_keys()
-            self.key_filename = config['identityfile'][0]
+            self.key_filename = config["identityfile"][0]
 
         try:
             if self.password:
@@ -49,18 +49,18 @@ class CmdHelper:
             print(f"Connection failed: {e}")
             exit(1)
 
-    def execute_command(self, command) -> (int, str, str):
+    def execute_command(self, command: str) -> Tuple[int, str, str]:
         try:
             self.connect()
-            print(f'Send command: {command}')
-            if command.startswith('su ') or command.startswith('sudo -i'):
-                raise NameError('You should implement it.')
+            print(f"Send command: {command}")
+            if command.startswith("su ") or command.startswith("sudo -i"):
+                raise NameError("You should implement it.")
                 stdin, stdout, stderr = self.client.exec_command(command)
-                stdin.write(f'{self.password}\n')
+                stdin.write(f"{self.password}\n")
                 stdin.flush()
                 data = stdout.read.splitlines()
                 for line in data:
-                    if line.split(':')[0] == 'AirPort':
+                    if line.split(":")[0] == "AirPort":
                         print(line)
 
             else:
@@ -74,7 +74,7 @@ class CmdHelper:
             return exit_status, output, error
         except Exception as e:
             print(f"Command execution failed: {e}")
-            return 1, None, str(e)
+            return (1, "", str(e))
         finally:
             self.disconnect()
 
@@ -82,7 +82,7 @@ class CmdHelper:
         self.client.close()
         print(f"Disconnected from {self.host}")
 
-    def run_cmd(self, command) -> (int, str, str):
+    def run_cmd(self, command) -> Tuple[int, str, str]:
         exit_status, output, error = self.execute_command(command)
         return exit_status, output, error
 
@@ -92,4 +92,4 @@ class CmdHelper:
 
 if __name__ == "__main__":
     runner = CmdHelper()
-    status, out, err = runner.execute_command('ifconfig')
+    status, out, err = runner.execute_command("ifconfig")
