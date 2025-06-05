@@ -79,3 +79,9 @@ networksetup -listallhardwareports
 Ищи блок с `Wi-Fi` и посмотри значение `Device`.
 ````
 ````
+
+###### update_etcd.py
+
+```bash
+python update_etcd.py --host localhost --port 2379 my/key myvalue
+```
