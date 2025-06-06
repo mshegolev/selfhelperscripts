@@ -9,7 +9,7 @@ source ~/.zshrc
 
 ```
 
-###### copy-kyes
+###### copy-keys
 
 ```bash
 ssh-copy-id -i ~/.ssh/id_rsa1239327423476 <hostname>
