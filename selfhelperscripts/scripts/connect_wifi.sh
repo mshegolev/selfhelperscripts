@@ -20,8 +20,8 @@ if [ -z "$SSID" ]; then
   exit 1
 fi
 
-if [ -z "$WIFI_PASSWORD" ]; then
-  echo "❌ SSID не указан в конфиге!"
+if [ -z "${WIFI_PASSWORD+x}" ]; then
+  echo "❌ WIFI_PASSWORD не указан в конфиге!"
   exit 1
 fi
 echo "Отключаем от текущей Wi-Fi сети..."

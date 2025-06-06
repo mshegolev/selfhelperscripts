@@ -8,8 +8,7 @@ setup(
     long_description=open("README.md", "r", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/mshegole/selfhelpscripts",
-    package_dir={'': 'selfhelperscripts/src'},
-    packages=find_packages(where='src'),
+    packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.10",
